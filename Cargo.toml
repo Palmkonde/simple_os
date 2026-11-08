@@ -1,6 +1,18 @@
+# disable rust-analyzer, cargo check --all-targets
+[[bin]]
+name = "simple_os"
+test = false
+bench = false
+
 [package]
 name = "simple_os"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic="abort"
