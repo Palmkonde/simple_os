@@ -16,14 +16,6 @@ Install `rustup` if you don't have it:
 curl https://sh.rustup.rs -sSf | sh
 ```
 
-Then, from the project root, add the two components the build needs:
-
-```sh
-rustup component add rust-src llvm-tools-preview
-```
-
-- `rust-src` lets Cargo compile `core` and `compiler_builtins` for the custom target.
-- `llvm-tools-preview` is needed by `bootimage` to create the bootable disk image.
 
 ### 2. bootimage
 
@@ -104,21 +96,6 @@ If everything works, a QEMU window opens and shows `Hello, Furry san!` in yellow
 | `Cargo.toml` | Uses `bootloader` 0.9 and sets `panic = "abort"` for both dev and release builds. |
 
 ## Troubleshooting
-
-**`can't find crate for core`**
-The `rust-src` component is missing. Run `rustup component add rust-src`.
-
-**`bootimage` says it could not find the `llvm-tools` component**
-Run `rustup component add llvm-tools-preview`.
-
-**Components go missing after a fresh clone or a toolchain update**
-You can let `rustup` install them automatically by adding a `components` line to `rust-toolchain.toml` (not tested yet in this project):
-
-```toml
-[toolchain]
-channel = "nightly"
-components = ["rust-src", "llvm-tools-preview"]
-```
 
 **Errors about unknown unstable options or target spec fields**
 Your nightly may be too old. Run `rustup update nightly`.
